@@ -17,6 +17,7 @@ This is a one-click interactive Bash script to install and manage a Ritual Infer
 - Open ports: `3001`, `4000`, `6379`, `8545`
 - Alchemy BASE RPC URL
 - Wallet private key with ETH on Base Mainnet
+- 5$ of Base Mainnet ETH
 
 ---
 
