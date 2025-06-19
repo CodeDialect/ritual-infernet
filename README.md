@@ -117,4 +117,5 @@ A: write `bash` then try running the command again.
 
 - [Ritual Infernet GitHub](https://github.com/ritual-net/infernet-container-starter)
 - [Foundry (by Paradigm)](https://book.getfoundry.sh/)
+- [Alchemy](https://dashboard.alchemy.com)
 - Script maintained by **Codedialect**
