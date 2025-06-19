@@ -7,6 +7,35 @@ YELLOW="\033[1;33m"
 RED="\033[0;31m"
 NC="\033[0m"
 
+
+read_secret() {
+  prompt="$1"
+  secret=""
+  charcount=0
+
+  printf "${CYAN}${prompt}${NC} "
+  while IFS= read -r -s -n1 char; do
+    if [[ $char == $'\0' || $char == $'\n' ]]; then
+      break
+    fi
+    if [[ $char == $'\177' ]]; then
+      # handle backspace
+      if [ $charcount -gt 0 ]; then
+        charcount=$((charcount-1))
+        secret="${secret%?}"
+        printf '\b \b'
+      fi
+    else
+      secret+="$char"
+      charcount=$((charcount+1))
+      printf '*'
+    fi
+  done
+  echo
+  REPLY="$secret"
+}
+
+
 echo -e "${GREEN}===== Ritual Infernet Node Manager =====${NC}"
 
 echo -e "${CYAN}\nChoose an option:${NC}"
@@ -16,11 +45,11 @@ echo -e "${YELLOW}3)${NC} Exit"
 read -rp "$(echo -e ${CYAN}Enter your choice [1-3]: ${NC})" CHOICE
 
 if [[ "$CHOICE" == "1" ]]; then
-  echo -en "${CYAN}Enter your Alchemy BASE Mainnet RPC URL:${NC} "
-  read RPC_URL
+  read_secret "Enter your Alchemy BASE Mainnet RPC URL:"
+  RPC_URL="$REPLY"
 
-  echo -en "${CYAN}Enter your PRIVATE KEY (with 0x):${NC} "
-  read WALLET_KEY
+  read_secret "Enter your PRIVATE KEY (with 0x):"
+  WALLET_KEY="$REPLY"
 
   sudo apt update && sudo apt upgrade -y
   sudo apt -qy install curl git nano jq lz4 build-essential screen ufw apt-transport-https ca-certificates software-properties-common
