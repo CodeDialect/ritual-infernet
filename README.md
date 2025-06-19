@@ -108,6 +108,8 @@ A: We now directly use `forge script` instead of `make` to avoid this cache issu
 **Q: It says `forge: command not found `**
 
 A: write `bash` then try running the command again.
+
+
 ---
 
 ## Credits
